@@ -1,5 +1,6 @@
 package com.example.studentapi.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
@@ -19,5 +20,6 @@ public class Course {
     private String department;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Learner> learners;
 } 
