@@ -27,4 +27,14 @@ public class ScheduleDAO {
             return Collections.emptyList();
         }
     }
+
+    public String getScheduleByGroup(String group) {
+        String url = "https://iis.bsuir.by/api/v1/schedule?studentGroup=" + group;
+        try {
+            return restTemplate.getForObject(url, String.class);
+        } catch (HttpClientErrorException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

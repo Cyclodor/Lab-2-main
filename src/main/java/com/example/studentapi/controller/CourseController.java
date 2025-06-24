@@ -50,4 +50,19 @@ public class CourseController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/external")
+    public List<Course> getExternalCourses() {
+        return courseService.getExternalCourses();
+    }
+
+    @GetMapping("/schedule/{group}")
+    public ResponseEntity<String> getScheduleByGroup(@PathVariable String group) {
+        String schedule = courseService.getScheduleByGroup(group);
+        if (schedule != null) {
+            return ResponseEntity.ok(schedule);
+        } else {
+            return ResponseEntity.status(502).body("Ошибка при получении данных из БГУИР API");
+        }
+    }
 } 
